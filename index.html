@@ -321,7 +321,7 @@ svg{stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-lin
   <div class="gf">*การคาดการณ์สมมติว่าร่างกายพร้อมและมีฐานแอโรบิกเพียงพอสำหรับระยะนั้นๆ</div>
 </section>
 
-<div class="foot">Runner's Lab · Jack Daniels (VDOT) · Karvonen (HR)</div>
+<div class="foot">Runner's Lab · Jack Daniels (VDOT) · Karvonen (HR) · v1.2</div>
 </div>
 
 <nav class="tabbar"><div class="in">
@@ -474,7 +474,7 @@ function drawProfile(){
   $("#gpx-prof").innerHTML=`<defs><linearGradient id="gg" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="var(--tint)" stop-opacity=".35"/><stop offset="1" stop-color="var(--tint)" stop-opacity="0"/></linearGradient></defs><polygon points="0,90 ${pts} 300,90" fill="url(#gg)" stroke="none"/><polyline points="${pts}" stroke="var(--tint)" stroke-width="1.8" vector-effect="non-scaling-stroke"/>`}
 function gpxRead(file){
   const fr=new FileReader();fr.onload=ev=>{
-    try{const doc=new DOMParser().parseFromString(ev.target.result,"text/xml"),tp=doc.getElementsByTagName("trkpt");
+    try{const doc=new DOMParser().parseFromString(ev.target.result,"text/xml");let tp=doc.getElementsByTagName("trkpt");if(tp.length<2)tp=doc.getElementsByTagName("rtept");
       if(tp.length<2){S.g.err="ไม่พบพิกัดเส้นทางในไฟล์ GPX (ต้องเป็น GPX Track)";showGpxErr();return}
       const pts=[];let total=0;
       for(let i=0;i<tp.length;i++){const t=tp[i],lat=parseFloat(t.getAttribute("lat")||"0"),lon=parseFloat(t.getAttribute("lon")||"0"),e=t.getElementsByTagName("ele")[0],ele=e?parseFloat(e.textContent||"0"):0;
